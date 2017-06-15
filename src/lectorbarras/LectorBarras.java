@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------
 * LectorBarras.java
 * versión 1.0
-* Copyright (C) 2017  José Ricardo Rodríguez Abreu.
+* Copyright (C) 2017  
 * Facultad de Ciencias,
 * Universidad Nacional Autónoma de México, Mexico.
 *
@@ -40,7 +40,7 @@ import javafx.stage.WindowEvent;
 import jfx.messagebox.MessageBox;
 
 /**
- * @author Jose Ricardo Rodriguez Abreu
+ * @author 
  * @version 1.0
  * @since Jun 15 2017.
  * <p>

@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------
 * InterfazController.java
 * versión 1.0
-* Copyright (C) 2017  José Ricardo Rodríguez Abreu.
+* Copyright (C) 2017 
 * Facultad de Ciencias,
 * Universidad Nacional Autónoma de México, Mexico.
 *
@@ -45,7 +45,7 @@ import jfx.messagebox.MessageBox;
 
 
 /**
- * @author Jose Ricardo Rodriguez Abreu
+ * @author 
  * @version 1.0
  * @since Jun 15 2017.
  * <p>
@@ -118,14 +118,19 @@ public class InterfazController implements Initializable {
      */
     @FXML
     private void abrirRegistro(ActionEvent event) {
-        Desktop dt = Desktop.getDesktop();
-        try {
-            dt.open(file);
-        } catch (IOException ex) {
-             MessageBox.show(new Stage(), "¡ERROR FATAL! \n\n No se pudo "
-                        + "abrir el el registro. Vuelva a intentar.\n",
-                        "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
-        }
+	if( Desktop.isDesktopSupported() )
+	    {
+		new Thread(() -> {
+			Desktop dt = Desktop.getDesktop();
+			try {
+			    dt.open(file);
+			} catch (IOException ex) {
+			    MessageBox.show(new Stage(), "¡ERROR FATAL! \n\n No se pudo "
+					    + "abrir el el registro. Vuelva a intentar.\n",
+					    "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
+			}
+		}).start();
+	    }
     }
     
     /**
@@ -209,7 +214,7 @@ public class InterfazController implements Initializable {
     private void acercaDe(ActionEvent event){
         String msj = " Programa que almacena codigos de barra:\n" +
                 " Versión 1.0\n" +
-                " Copyright (C) 2015  José Ricardo Rodríguez Abreu.\n" +
+                " Copyright (C) 2015 " +
                 " Facultad de Ciencias,\n" +
                 " Universidad Nacional Autónoma de México, Mexico.\n" +
                 " \n" +
@@ -231,7 +236,7 @@ public class InterfazController implements Initializable {
                 " http://www.gnu.org/licenses/gpl.html\n" +
                 " o escriba a la Free Software Foundation Inc.,\n" +
                 " 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n\n"
-                + "Contacto: ricardo_rodab@ciencias.unam.mx";
+                + "Contacto:";
         
         MessageBox.show(new Stage(), msj, "Un poco sobre el programa...",
                 MessageBox.OK);
