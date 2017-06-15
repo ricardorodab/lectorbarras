@@ -1,0 +1,101 @@
+<project name="Lector de codigo de barras" default="all" basedir=".">
+  <description>
+    Se usa para optimizar el manejo del programa proceso digital de imagenes.
+  </description>
+  
+  <property name="nombreProyecto" value="lectorBarras"/>
+ 
+  <target name="compile" description="Compila el código fuente.">
+    <mkdir dir="build"/>
+    <javac srcdir="src/lectorbarras" 
+	   destdir="build"
+	   debug="true"
+           debuglevel="lines,vars,source"
+           includeantruntime="false"
+           deprecation="true"
+           nowarn="off">
+      <classpath> 
+        <fileset dir="lib">
+          <include name="*.jar"/>
+	  <include name="*.fxml"/>
+	  <include name="*.css"/>
+        </fileset>
+      </classpath>
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+    <copy todir="build/lectorbarras">
+      <fileset dir="src/lectorbarras"
+	       includes="**/*.fxml" />      
+    </copy>
+    <copy todir="build/lib">
+      <fileset dir="lib"
+	       includes="**/*.*" />
+    </copy>
+
+  </target>
+  
+  <target name="doc"  description="Crea la documentación del código.">
+    <mkdir dir="doc"/>
+    <javadoc destdir="doc" author="true" version="true" charset="UTF-8">
+      <classpath>
+        <fileset dir="lib">
+	  <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <link href="http://docs.oracle.com/javase/8/docs/api/" />
+      <fileset file="src/lectorbarras/*.java"/>
+    </javadoc>
+  </target>
+  
+  <target name="clean" description="Elimina los archivos temporales y los directorios build y doc.">
+    <delete>
+      <fileset file="src/lectorbarras/*" defaultexcludes="no">
+	<exclude name="*.java"/>
+	<exclude name="*.xml"/>
+	<exclude name="*.fxml"/>
+	<exclude name="*.txt" />
+	<exclude name="*.css" />
+      </fileset>
+    <fileset file="./*" defaultexcludes="no">
+	<exclude name="*.css"/>
+	<exclude name="*.java"/>
+	<exclude name="*.xml"/>
+	<exclude name="*.fxml"/>
+	<exclude name="*.txt" />
+      </fileset>
+    </delete>
+    <delete dir="build" />
+    <delete dir="doc" />
+    <delete dir="dist" />
+    <delete file="${nombreProyecto}.tar" />
+  </target>
+  
+  <target name="dist" depends="clean" description="Crea un archivo tar para enviar el código.">
+    <tar destfile="${nombreProyecto}.tar" basedir="./"/>
+  </target>
+  
+  <target name="all" depends="clean,compile,doc,jar" description="Compila y genera la documentación."/>
+
+  <target name="jar" depends="clean,compile" description="Crea el jar.">
+    <mkdir dir="dist/jar"/>
+    <jar destfile="dist/jar/${nombreProyecto}.jar" basedir="build/">
+	<manifest>
+	  <attribute name="Class-Path" value="lib/jfxmessagebox-1.1.0.jar lib/controlsfx-8.40.10.jar lib/commons-io-2.4.jar lib/commons-io-2.4-javadoc.jar lib/commons-io-2.4-sources.jar"/>
+		<attribute name="Main-Class" value="lectorbarras.LectorBarras"/>
+	</manifest>
+	</jar>
+	<mkdir dir="dist/jar/lib"/>
+	<copy todir="dist/jar/lib">
+	  <fileset dir="lib"
+		   includes="**/*.*" />
+	</copy>
+	<copy todir="./" >
+	  <fileset dir="dist/jar/"
+		   includes= "**/*.jar" />
+	</copy>
+  </target>
+
+  <target name="run" depends="clean,compile,jar" description="Corre el programa.">
+	<java jar="dist/jar/${nombreProyecto}.jar" fork="true" />
+  </target>
+</project>

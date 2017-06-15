@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="606.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lectorbarras.InterfazController">
+   <children>
+      <BorderPane prefHeight="606.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Registro">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#abrirRegistro" text="Abrir registro" />
+                    <MenuItem mnemonicParsing="false" onAction="#guardarComo" text="Crear un nuevo registro" />
+                        <MenuItem mnemonicParsing="false" onAction="#reiniciarRegistro" text="Reiniciar registro actual" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <TextField fx:id="entrada" alignment="CENTER" onAction="#escanear" promptText="Escanear alumno" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Pane prefHeight="577.0" prefWidth="134.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#escanear" text="Ingresar " />
+               </children>
+            </Pane>
+         </right>
+         <left>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar código de barras: " textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
+            </Text>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
