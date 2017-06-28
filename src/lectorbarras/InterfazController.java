@@ -93,7 +93,7 @@ public class InterfazController implements Initializable {
         FileChooser.ExtensionFilter extFilter0 = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().addAll(extFilter0);
         file = fileChooser.showSaveDialog(stage);
-        String hoy = fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" +
+        String hoy = fecha.get(Calendar.YEAR) + "-" + (1+fecha.get(Calendar.MONTH)) + "-" +
                 fecha.get(Calendar.DAY_OF_MONTH);
         if(file != null){
             try {
@@ -143,7 +143,7 @@ public class InterfazController implements Initializable {
         if(!file.delete()) {
             //error;
         } else {
-            String hoy = fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" +
+            String hoy = fecha.get(Calendar.YEAR) + "-" + (1+fecha.get(Calendar.MONTH)) + "-" +
                     fecha.get(Calendar.DAY_OF_MONTH);
             try {
                 file = new File("./results/" + nombre);
@@ -251,7 +251,7 @@ public class InterfazController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fecha = Calendar.getInstance();
-        String hoy = fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" +
+        String hoy = fecha.get(Calendar.YEAR) + "-" + (1+fecha.get(Calendar.MONTH)) + "-" +
                 fecha.get(Calendar.DAY_OF_MONTH);
         try {
             file = new File("./results/" + hoy + ".txt");
