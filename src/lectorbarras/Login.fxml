@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lectorbarras.LoginController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="311.0" prefWidth="421.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Archivo">
+                     <items>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Abrir" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Guardar como..." />
+                        <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Edicion">
+                     <items>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Crear un nuevo registro" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Reiniciar registro actual" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Eliminar entradas repetidas" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Ordenar registro" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Ordenar y eliminar repetidos" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Ver">
+                     <items>
+                        <MenuItem disable="true" mnemonicParsing="false" text="Abrir registro actual" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Ayuda">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lector de Código de barras" textAlignment="CENTER">
+               <font>
+                  <Font name="TeXGyreTermesMath-Regular" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="25.0" top="35.0" />
+               </VBox.margin>
+            </Text>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del que registra:" textAlignment="CENTER">
+                     <font>
+                        <Font name="TeXGyreTermesMath-Regular" size="17.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Facultad_Ciencias.png" />
+                           </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="150.0" prefWidth="274.0" spacing="10.0">
+                           <children>
+                              <Label text="Nombre:" />
+                              <TextField fx:id="nombre" promptText="Nombre" />
+                              <Label text="Apellidos:" />
+                              <TextField fx:id="apellido" promptText="Apellidos" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¿Que carrera registra?" textAlignment="CENTER">
+                     <font>
+                        <Font name="TeXGyreTermesMath-Regular" size="17.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addCarrera" text="+" textOverrun="CENTER_ELLIPSIS">
+                           <effect>
+                              <DropShadow color="#750c63" height="109.04" radius="52.5025" width="102.97" />
+                           </effect>
+                        </Button>
+                        <MenuButton fx:id="carreras" mnemonicParsing="false" text="Carreras" />
+                     </children>
+                  </HBox>
+                  <Hyperlink fx:id="linkBorrar" onAction="#removeCarrera" text="Eliminar carrera" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <SplitPane disable="true" orientation="VERTICAL" prefHeight="11.0" prefWidth="498.0" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" text="Iniciar Sesion">
+                     <effect>
+                        <DropShadow color="#d1eb0d" spread="0.76" />
+                     </effect>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

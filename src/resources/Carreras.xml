@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carreras>
+  <carrera id="101">
+    <nombre>ACTUARIA</nombre>
+  </carrera>
+  <carrera id="201">
+    <nombre>BIOLOGIA</nombre>
+  </carrera>
+  <carrera id="104">
+    <nombre>CIENCIAS DE LA COMPUTACION</nombre>
+  </carrera>
+  <carrera id="127">
+    <nombre>CIENCIAS DE LA TIERRA</nombre>
+  </carrera>
+  <carrera id="106">
+    <nombre>FISICA</nombre>
+  </carrera>
+  <carrera id="134">
+    <nombre>FISICA BIOMEDICA</nombre>
+  </carrera>
+  <carrera id="217">
+    <nombre>MANEJO SUSTENTABLE DE ZONAS COSTERAS</nombre>
+  </carrera>
+  <carrera id="122">
+    <nombre>MATEMATICAS</nombre>
+  </carrera>
+  <carrera id="136">
+    <nombre>MATEMATICAS APLICADAS</nombre>
+  </carrera>
+</carreras>

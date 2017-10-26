@@ -18,6 +18,8 @@
         <fileset dir="lib">
           <include name="*.jar"/>
 	  <include name="*.fxml"/>
+	  <include name="*.png"/>
+	  <include name="*.xml"/>
 	  <include name="*.css"/>
         </fileset>
       </classpath>
@@ -25,7 +27,14 @@
     </javac>
     <copy todir="build/lectorbarras">
       <fileset dir="src/lectorbarras"
-	       includes="**/*.fxml" />      
+	       includes="**/*.fxml" />
+      <fileset dir="src/lectorbarras"
+	       includes="**/*.png" />
+    </copy>
+    <mkdir dir="build/resources"/>
+    <copy todir="build/resources">
+      <fileset dir="src/resources"
+	       includes="**/*.*" />
     </copy>
     <copy todir="build/lib">
       <fileset dir="lib"
@@ -54,6 +63,7 @@
 	<exclude name="*.xml"/>
 	<exclude name="*.fxml"/>
 	<exclude name="*.txt" />
+	<exclude name="*.png" />
 	<exclude name="*.css" />
       </fileset>
     <fileset file="./*" defaultexcludes="no">
@@ -62,6 +72,7 @@
 	<exclude name="*.xml"/>
 	<exclude name="*.fxml"/>
 	<exclude name="*.txt" />
+	<exclude name="*.png" />
       </fileset>
     </delete>
     <delete dir="build" />
@@ -80,7 +91,7 @@
     <mkdir dir="dist/jar"/>
     <jar destfile="dist/jar/${nombreProyecto}.jar" basedir="build/">
 	<manifest>
-	  <attribute name="Class-Path" value="lib/jfxmessagebox-1.1.0.jar lib/controlsfx-8.40.10.jar lib/commons-io-2.4.jar lib/commons-io-2.4-javadoc.jar lib/commons-io-2.4-sources.jar"/>
+	  <attribute name="Class-Path" value="lib/jfxmessagebox-1.1.0.jar lib/controlsfx-8.40.10.jar lib/commons-io-2.4.jar lib/commons-io-2.4-javadoc.jar lib/commons-io-2.4-sources.jar lib/jdom-2.0.6.jar lib/jdom-2.0.6-javadoc.jar" />
 		<attribute name="Main-Class" value="lectorbarras.LectorBarras"/>
 	</manifest>
 	</jar>

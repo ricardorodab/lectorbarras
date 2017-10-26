@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------
 * LectorBarras.java
 * versión 1.0
-* Copyright (C) 2017  
+* Copyright (C) 2017
 * Facultad de Ciencias,
 * Universidad Nacional Autónoma de México, Mexico.
 *
@@ -24,7 +24,7 @@
 * o escriba a la Free Software Foundation Inc.,
 * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * -------------------------------------------------------------------
-*/
+ */
 package lectorbarras;
 
 import java.io.IOException;
@@ -35,42 +35,50 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import jfx.messagebox.MessageBox;
 
 /**
- * @author 
- * @version 1.0
+ * @author @version 1.0
  * @since Jun 15 2017.
  * <p>
  * Clase principal.</p>
  *
  * <p>
- *  Esta clase manda a llamar al controlador de la vista..</p>
+ * Esta clase manda a llamar al controlador de la vista..</p>
  */
 public class LectorBarras extends Application {
-    
+
     /**
      * Metodo main de un programa hecho en JavaFX.
+     *
      * @param stage - Es la interfaz que se crea.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Interfaz.fxml"));
-        Scene scene = new Scene(root);
-        InterfazController.stage = stage;
+        Scene scene = new Scene(new StackPane());
+
+        WindowsManager loginManager = new WindowsManager(scene);
+        loginManager.showLoginScreen();
+
         stage.setScene(scene);
+
+        InterfazController.stage = stage;
+
         stage.show();
+
         stage.setOnCloseRequest((WindowEvent we) -> {
             MessageBox.show(new Stage(), "Recuerde que "
                     + "para cerrar correctamente el programa debe presionar el  "
                     + "menú de Archivo seguido de la opción Salir. \n",
                     "¿Está seguro?", MessageBox.ICON_WARNING | MessageBox.OK);
             try {
-                if(InterfazController.writter != null)
+                if (InterfazController.writter != null) {
                     InterfazController.writter.close();
+                }
                 stage.close();
             } catch (IOException ex) {
                 MessageBox.show(new Stage(), "¡ERROR FATAL! \n\n Ocurrió un error al"
@@ -79,11 +87,11 @@ public class LectorBarras extends Application {
             }
         });
     }
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
-    }    
+    }
 } //Fin de LectorBarras.java

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,49 +10,123 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="606.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lectorbarras.InterfazController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="606.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lectorbarras.InterfazController">
    <children>
-      <BorderPane prefHeight="606.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane minHeight="606.0" minWidth="604.0" prefHeight="606.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="Archivo">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Registro">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#abrirRegistro" text="Abrir registro" />
-                    <MenuItem mnemonicParsing="false" onAction="#guardarComo" text="Crear un nuevo registro" />
-                        <MenuItem mnemonicParsing="false" onAction="#reiniciarRegistro" text="Reiniciar registro actual" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </top>
-         <center>
-            <TextField fx:id="entrada" alignment="CENTER" onAction="#escanear" promptText="Escanear alumno" BorderPane.alignment="CENTER" />
-         </center>
-         <right>
-            <Pane prefHeight="577.0" prefWidth="134.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#escanear" text="Ingresar " />
+                  <MenuBar>
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Archivo">
+                        <items>
+                              <MenuItem mnemonicParsing="false" onAction="#abrirRegistroAnterior" text="Abrir" />
+                              <MenuItem mnemonicParsing="false" onAction="#guardarComo" text="Guardar como..." />
+                          <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+                        </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="Edicion">
+                           <items>
+                          <MenuItem mnemonicParsing="false" onAction="#crearNuevoRegistro" text="Crear un nuevo registro" />
+                              <MenuItem mnemonicParsing="false" onAction="#reiniciarRegistro" text="Reiniciar registro actual" />
+                              <MenuItem mnemonicParsing="false" onAction="#eliminarRepetidos" text="Eliminar entradas repetidas" />
+                              <MenuItem mnemonicParsing="false" onAction="#ordenar" text="Ordenar registro" />
+                              <MenuItem mnemonicParsing="false" onAction="#ordenarYQuitarRepetidos" text="Ordenar y eliminar repetidos" />
+                           </items>
+                        </Menu>
+                      <Menu mnemonicParsing="false" text="Ver">
+                        <items>
+                              <MenuItem mnemonicParsing="false" onAction="#abrirRegistro" text="Abrir registro actual" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Ayuda">
+                        <items>
+                          <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <VBox alignment="CENTER" prefHeight="172.0" prefWidth="604.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/Facultad_Ciencias.png" />
+                           </image>
+                           <effect>
+                              <Reflection />
+                           </effect>
+                        </ImageView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre del registrante:" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="DejaVu Sans Condensed Bold" size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido del registrante:" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="DejaVu Sans Bold" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                                 <children>
+                                    <Text fx:id="nombreLabel" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="DejaVuMathTeXGyre-Regular" size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="apellidoLabel" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="DejaVuMathTeXGyre-Regular" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </Pane>
+            </VBox>
+         </top>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="ingresar" mnemonicParsing="false" onAction="#escanear" text="Ingresar ">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </right>
-         <left>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar código de barras: " textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <center>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingresar código de barras: " textAlignment="CENTER" />
+                  <TextField fx:id="entrada" alignment="CENTER" onAction="#escanear" promptText="Escanear alumno" />
+               </children>
                <BorderPane.margin>
-                  <Insets left="20.0" />
+                  <Insets top="40.0" />
                </BorderPane.margin>
-            </Text>
-         </left>
+            </HBox>
+         </center>
+         <bottom>
+            <VBox alignment="CENTER" prefHeight="229.0" prefWidth="604.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ProgressIndicator fx:id="procesoBar" visible="false" />
+                  <Button fx:id="cerrarSesion" mnemonicParsing="false" text="Cerrar Sesión" underline="true">
+                     <font>
+                        <Font name="DejaVu Sans Condensed Bold Oblique" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
