@@ -246,15 +246,12 @@ public class InterfazController implements Initializable {
      */
     @FXML
     private void reiniciarRegistro(ActionEvent event) {
-	String hoy = fecha.get(Calendar.YEAR) + "-" + (1 + fecha.get(Calendar.MONTH)) + "-"
-	    + fecha.get(Calendar.DAY_OF_MONTH);
-	if(file == null) {
-	    file = new File("./results/" + hoy + ".txt");
-	}
-	String nombre = file.getName();
+        String nombre = file.getName();
         if (!file.delete()) {
             //error;
-        } else {         
+        } else {
+            String hoy = fecha.get(Calendar.YEAR) + "-" + (1 + fecha.get(Calendar.MONTH)) + "-"
+                    + fecha.get(Calendar.DAY_OF_MONTH);
             try {
                 file = new File("./results/" + nombre);
                 writter = new BufferedWriter(new FileWriter(file));
@@ -458,7 +455,7 @@ public class InterfazController implements Initializable {
     private void myEliminarRepetidos() {
         procesoBar.setVisible(true);
         root.setDisable(true);
-        HashMap<Integer, String> conjunto = new HashMap<Integer, String>();
+        HashMap<Long, String> conjunto = new HashMap<Long, String>();
         String fecha = "";
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -475,7 +472,7 @@ public class InterfazController implements Initializable {
                 String dato = parse[0];
                 dato = dato.replace("[", "").replace("]", "");
                 dato = dato.split(":")[1];
-                int id = Integer.parseInt(dato);
+                long id = Long.parseLong(dato);
                 if (!conjunto.containsKey(id)) {
                     conjunto.put(id, linea);
                 }
@@ -532,13 +529,13 @@ public class InterfazController implements Initializable {
                     String dato = parse[0];
                     dato = dato.replace("[", "").replace("]", "");
                     dato = dato.split(":")[1];
-                    int id = Integer.parseInt(dato);
+                    long id = Long.parseLong(dato);
                     
                     String[] parse2 = o2.split(",-,");
                     String dato2 = parse2[0];
                     dato2 = dato2.replace("[", "").replace("]", "");
                     dato2 = dato2.split(":")[1];
-                    int id2 = Integer.parseInt(dato2);
+                    long id2 = Long.parseLong(dato2);
                     if (id < id2) {
                         return -1;
                     } else if (id == id2) {
