@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------
 * InterfazController.java
 * versión 1.0
-* Copyright (C) 2017
+* Copyright (C) 2017 
 * Facultad de Ciencias,
 * Universidad Nacional Autónoma de México, Mexico.
 *
@@ -24,7 +24,7 @@
 * o escriba a la Free Software Foundation Inc.,
 * 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 * -------------------------------------------------------------------
-*/
+ */
 package lectorbarras;
 
 import java.awt.Desktop;
@@ -66,67 +66,67 @@ import org.apache.commons.io.FileUtils;
  * Desde esta clase se mantiene la vista y el controlador.</p>
  */
 public class InterfazController implements Initializable {
-    
+
     /**
      * Necesitamos mantener el texto en algun metodo de entrada.
      */
     @FXML
     private TextField entrada;
-    
+
     @FXML
     private Text nombreLabel;
-    
+
     @FXML
     private Text apellidoLabel;
-    
+
     @FXML
     private Button cerrarSesion;
-    
+
     @FXML
     private ProgressIndicator procesoBar;
     @FXML
     private AnchorPane root;
-    
+
     /**
      * Es el archivo que estamos constantemente modificando.
      */
     private File file;
-    
+
     /**
      * Es el objeto que va a escribir sobre el archivo.
      */
     protected static BufferedWriter writter;
-    
+
     /**
      * Es el objeto que va a leer sobre el archivo.
      */
     protected static BufferedReader reader;
-    
+
     /**
      * Para propositos de uso diario, se almacena los datos con fecha.
      */
     private Calendar fecha;
-    
+
     /**
      * Constante para poder obtener el stage.
      */
     protected static Stage stage;
-    
+
     /**
      * Apellido de la persona que inició sesión.
      */
     private String apellido;
-    
+
     /**
      * Apellido de la persona que inició sesión.
      */
     private String nombre;
-    
+
     /**
      * Es la carrera de los alumnos a registrar.
      */
     private String carrera;
-    
+
     public void setNombres(String apellido, String nombre, String carrera) {
         this.apellido = apellido;
         this.nombre = nombre;
@@ -135,7 +135,7 @@ public class InterfazController implements Initializable {
         nombreLabel.setText(nombre);
         apellidoLabel.setText(apellido);
     }
-    
+
     public void initManager(final WindowsManager loginManager) {
         cerrarSesion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -157,12 +157,12 @@ public class InterfazController implements Initializable {
             try {
                 FileUtils.copyFile(file, fileTmp);
             } catch (IOException ex) {
-                //Error
+               //Error
                 Logger.getLogger(InterfazController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
     /**
      * Metodo para guardar un nuevo registro con un nuevo nombre.
      *
@@ -188,11 +188,11 @@ public class InterfazController implements Initializable {
                         + "Iniciar como administrador el programa o tener los permisos necesarios.\n"
                         + "Tener una versión de java actualizada (1.8.0_51 o superior).",
                         "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
-                
+
             }
         }
     }
-    
+
     @FXML
     private void abrirRegistroAnterior(ActionEvent event) {
         FileChooser ventana = new FileChooser();
@@ -200,7 +200,7 @@ public class InterfazController implements Initializable {
         FileChooser.ExtensionFilter txt = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         ventana.getExtensionFilters().add(txt);
         File archivo = ventana.showOpenDialog(stage);
-        
+
         if (archivo != null) {
             try {
                 file = archivo;
@@ -215,9 +215,9 @@ public class InterfazController implements Initializable {
                         "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
             }
         }
-        
+
     }
-    
+
     /**
      * Metodo para abrir un registro en edicion.
      *
@@ -238,7 +238,7 @@ public class InterfazController implements Initializable {
             }).start();
         }
     }
-    
+
     /**
      * Metodo para reiniciar un registro desde cero.
      *
@@ -264,7 +264,7 @@ public class InterfazController implements Initializable {
             }
         }
     }
-    
+
     /**
      * Metodo para ecanear un codigo de barras y almacenarlo.
      *
@@ -277,9 +277,25 @@ public class InterfazController implements Initializable {
         entradaText = entradaText.replaceAll("tid:", "");
         entradaText = entradaText.replace("tid", "");
         entradaText = entradaText.replace("Tid", "");
+        entradaText = entradaText.replace("-","");
+        entradaText = entradaText.replace(" ", "");
+        String entradaCpy = new String(entradaText);
+        
         if (entradaText.contains(":")) {
             entradaText = entradaText.split(":")[1];
         }
+        
+        for (char c : entradaText.toCharArray()) {
+            char[] stringC = {c};
+            String stringCadena = new String(stringC);
+            if (!EsNumero.esNumero(stringCadena))
+            {
+                entradaCpy = entradaCpy.replace(stringCadena, "");
+            }
+        }
+        
+        entradaText = entradaCpy;
+        
         try {
             if (event.getSource() instanceof TextField) {
                 Thread.sleep(500);
@@ -296,7 +312,7 @@ public class InterfazController implements Initializable {
             }
         }
     }
-    
+
     /**
      * Metodo para salir correctamente el programa y detener ejecucion.
      *
@@ -318,7 +334,7 @@ public class InterfazController implements Initializable {
             System.exit(0);
         }
     }
-    
+
     /**
      * Método que despliega la licencia del programa y una pequeña ayuda.
      *
@@ -328,7 +344,8 @@ public class InterfazController implements Initializable {
     private void acercaDe(ActionEvent event) {
         String msj = " Programa que almacena codigos de barra:\n"
                 + " Versión 1.0\n"
-                + " Copyright (C) 2015 "
+                + " Copyright (C) 2015 Jose Ricardo Rodríguez Abreu. \n" 
+                + " Contacto: ricardo_rodab@ciencias.unam.mx \n\n"
                 + " Facultad de Ciencias,\n"
                 + " Universidad Nacional Autónoma de México, Mexico.\n"
                 + " \n"
@@ -349,36 +366,29 @@ public class InterfazController implements Initializable {
                 + " siguiente URL:\n"
                 + " http://www.gnu.org/licenses/gpl.html\n"
                 + " o escriba a la Free Software Foundation Inc.,\n"
-                + " 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n\n"
-                + "Contacto:";
-        
+                + " 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n\n";
+
         MessageBox.show(new Stage(), msj, "Un poco sobre el programa...",
                 MessageBox.OK);
-        
+
     }
-    
+
     @FXML
     private void ordenarYQuitarRepetidos(ActionEvent event) {
-        new Thread(() -> {
-            myEliminarRepetidos();
-            myOrdernar();
-        }).start();
+        myEliminarRepetidos();
+        myOrdernar();
     }
-    
+
     @FXML
     private void ordenar(ActionEvent event) {
-        new Thread(() -> {
-            myOrdernar();
-        }).start();
+        myOrdernar();
     }
-    
+
     @FXML
     private void eliminarRepetidos(ActionEvent event) {
-        new Thread(() -> {
-            myEliminarRepetidos();
-        }).start();
+        myEliminarRepetidos();
     }
-    
+
     /**
      * Este es el main de nuestro programa.
      *
@@ -410,7 +420,7 @@ public class InterfazController implements Initializable {
                     "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
         }
     }
-    
+
     /**
      * Guarda en el archivo lo que reciba literal.
      *
@@ -426,7 +436,7 @@ public class InterfazController implements Initializable {
                     "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
         }
     }
-    
+
     /**
      * Guarda con formato de entrada de lectura en el archivo.
      *
@@ -441,7 +451,7 @@ public class InterfazController implements Initializable {
         try {
             writter.write("[Codigo:" + entradaText + "],-,"
                     + "[Carrera:" + this.carrera + "],-,"
-                            + "[Registrado por:" + this.nombre + " "
+                    + "[Registrado por:" + this.nombre + " "
                     + this.apellido + "],-,[Hora:" + horaComplete + "]\n");
             writter.flush();
             entrada.setText("");
@@ -451,11 +461,11 @@ public class InterfazController implements Initializable {
                     "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
         }
     }
-    
+
     private void myEliminarRepetidos() {
         procesoBar.setVisible(true);
         root.setDisable(true);
-        HashMap<Long, String> conjunto = new HashMap<Long, String>();
+        HashMap<Integer, String> conjunto = new HashMap<Integer, String>();
         String fecha = "";
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -472,7 +482,7 @@ public class InterfazController implements Initializable {
                 String dato = parse[0];
                 dato = dato.replace("[", "").replace("]", "");
                 dato = dato.split(":")[1];
-                long id = Long.parseLong(dato);
+                int id = Integer.parseInt(dato);
                 if (!conjunto.containsKey(id)) {
                     conjunto.put(id, linea);
                 }
@@ -496,11 +506,11 @@ public class InterfazController implements Initializable {
                     + "Tener una versión de java actualizada (1.8.0_51 o superior).",
                     "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
         }
-        
+
         root.setDisable(false);
         procesoBar.setVisible(false);
     }
-    
+
     private void myOrdernar() {
         procesoBar.setVisible(true);
         root.setDisable(true);
@@ -529,13 +539,13 @@ public class InterfazController implements Initializable {
                     String dato = parse[0];
                     dato = dato.replace("[", "").replace("]", "");
                     dato = dato.split(":")[1];
-                    long id = Long.parseLong(dato);
-                    
+                    int id = Integer.parseInt(dato);
+
                     String[] parse2 = o2.split(",-,");
                     String dato2 = parse2[0];
                     dato2 = dato2.replace("[", "").replace("]", "");
                     dato2 = dato2.split(":")[1];
-                    long id2 = Long.parseLong(dato2);
+                    int id2 = Integer.parseInt(dato2);
                     if (id < id2) {
                         return -1;
                     } else if (id == id2) {
@@ -564,9 +574,9 @@ public class InterfazController implements Initializable {
                     + "Tener una versión de java actualizada (1.8.0_51 o superior).",
                     "Error crítico", MessageBox.ICON_ERROR | MessageBox.OK);
         }
-        
+
         root.setDisable(false);
         procesoBar.setVisible(false);
     }
-    
+
 } //Fin de InterfazController.java
